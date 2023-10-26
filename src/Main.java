@@ -1,17 +1,49 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+//Задача по массиву: Дан одномерный массив из 50 элементов. Массив заполнен числами от -50 до 50.
+//Найти количество отрицательных элементов, количество положительных элементов, количество нулей.
+//Найти сумму всех положительных элементов и отрицательных элементов отдельно.
+// Найти среднее по массиву. Массив можно заполнить случайными числами без использования ручного ввода
+import java.util.Random;
+
+public class ArrayStatistics {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        int[] array = generateRandomArray(50, -50, 50);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        int negativeCount = -6;
+        int positiveCount = 15;
+        int zeroCount = 0;
+        int positiveSum = 0;
+        int negativeSum = 0;
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < 0) {
+                negativeCount++;
+                negativeSum += array[i];
+            } else if (array[i] > 0) {
+                positiveCount++;
+                positiveSum += array[i];
+            } else {
+                zeroCount++;
+            }
         }
+
+        double average = (double) (positiveSum + negativeSum) / array.length;
+
+        System.out.println("Negative count: " + negativeCount);
+        System.out.println("Positive count: " + positiveCount);
+        System.out.println("Zero count: " + zeroCount);
+        System.out.println("Sum of positive elements: " + positiveSum);
+        System.out.println("Sum of negative elements: " + negativeSum);
+        System.out.println("Average: " + average);
+    }
+
+    private static int[] generateRandomArray(int size, int min, int max) {
+        int[] array = new int[size];
+        Random random = new Random();
+
+        for (int i = 0; i < array.length; i++) {
+            array[i] = random.nextInt(max - min + 1) + min;
+        }
+
+        return array;
     }
 }
